@@ -33,6 +33,18 @@ def parse_idr_number(val: Optional[str]) -> Optional[float]:
     # Detect negative signs or accounting parentheses: (1.000)
     is_negative = (raw.startswith("(") and raw.endswith(")")) or "-" in raw
 
+    # Support shorthand suffixes: Jt (Juta), M (Miliar), rb/k (Ribu)
+    multiplier = 1.0
+    if re.search(r"(?i)\b(jt|juta)\b", raw):
+        multiplier = 1000000.0
+        raw = re.sub(r"(?i)\b(jt|juta)\b", "", raw)
+    elif re.search(r"(?i)\b(m|miliar|milyar)\b", raw):
+        multiplier = 1000000000.0
+        raw = re.sub(r"(?i)\b(m|miliar|milyar)\b", "", raw)
+    elif re.search(r"(?i)\b(rb|ribu|k)\b", raw):
+        multiplier = 1000.0
+        raw = re.sub(r"(?i)\b(rb|ribu|k)\b", "", raw)
+
     # Remove currency prefixes, units, signs, and percentage symbols
     cleaned = re.sub(r"(?i)\b(rp\.?|idr\.?|lot|lembar|lbr|shares?)\b", "", raw)
     cleaned = cleaned.replace("Rp.", "").replace("rp.", "").replace("Rp", "").replace("rp", "")
@@ -57,7 +69,7 @@ def parse_idr_number(val: Optional[str]) -> Optional[float]:
             cleaned = f"{int_part}.{dec_part}"
 
     try:
-        num = float(cleaned)
+        num = float(cleaned) * multiplier
         return -num if is_negative else num
     except ValueError:
         return None
