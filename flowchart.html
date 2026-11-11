@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flowchart Alur Aplikasi - Local Wealth Aggregator</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 8px;
+    }
+    p {
+      color: #94a3b8;
+      font-size: 14px;
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+    button {
+      background: #2563eb;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+    button:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+    button.svg-btn {
+      background: #059669;
+      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+    }
+    button.svg-btn:hover {
+      background: #047857;
+    }
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      max-width: 900px;
+      width: 100%;
+      overflow-x: auto;
+      display: flex;
+      justify-content: center;
+    }
+    #diagram {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>📐 Flowchart Alur: Local Net Worth Aggregator</h1>
+    <p>Diagram arsitektur 6-stage pipeline (macOS Native Apple Vision + Hybrid Extractor)</p>
+  </div>
+
+  <div class="actions">
+    <button onclick="downloadPNG()">
+      <span>📷</span> Unduh Gambar PNG (HD)
+    </button>
+    <button class="svg-btn" onclick="downloadSVG()">
+      <span>📐</span> Unduh Vektor SVG
+    </button>
+  </div>
+
+  <div class="card">
+    <div id="diagram" class="mermaid">
+flowchart TD
+    %% Input
+    A["📱 Raw Screenshots<br/>(Ajaib, Stockbit, IPOT, dll.)"] --> B["1. Gatekeeper<br/>• Drop Duplikat (MD5 & pHash)<br/>• Konversi ke RGB PNG"]
+
+    %% OCR
+    B --> C["2. Native Apple Vision OCR<br/>• Ekstrak Bounding Box & Teks<br/>• Filter Noise (Conf >= 0.4)"]
+
+    %% SPATIAL CLUSTERING (KUNCI AKURASI)
+    C --> D["3. Spatial Clustering ⭐<br/>• Inversi Sumbu Y: Vision (0,0 Kiri-Bawah) -> Top-Down<br/>• Kelompokkan Teks Sebaris (Y-Tolerance 0.015)<br/>• Urutkan Kolom Kiri ke Kanan (X-Ascending)"]
+
+    %% HYBRID EXTRACTION
+    D --> E{"4. Hybrid Extractor"}
+    E -- "Layout Dikenal<br/>(Stockbit / Ajaib)" --> F["⚡ Fast-Path (0.000s)<br/>Ekstraksi Spasial Presisi 100%"]
+    E -- "Layout Baru" --> G["🤖 Local LLM (qwen3.5:2b)<br/>Prompt JSON Schema Enforcement"]
+
+    %% NORMALIZER & MATH
+    F --> H["5. Normalizer & Aljabar Finansial<br/>• Dual-Locale Parser (Titik/Koma/Shorthand)<br/>• Market Value = Invested + PnL<br/>• Verifikasi Matematika (✅ OK)"]
+    G --> H
+
+    %% DEDUPLIKASI & OUTPUT
+    H --> I["6. Cross-Image Deduplicator<br/>Merge Overlap Scrolling Screenshot"]
+    I --> J["🎯 OUTPUT AKHIR"]
+
+    %% OUTPUT DETAIL
+    J --> K["💰 Grand Total Net Worth<br/>Total Seluruh Nilai Kekayaan"]
+    J --> L["📋 Rincian Sumber Aset<br/>List Total itu dari Mana Saja"]
+    J --> M["🔍 Detail Audit Saham<br/>Daftar Kepemilikan & Status ✅"]
+    </div>
+  </div>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#1e293b',
+        primaryColor: '#0284c7',
+        primaryTextColor: '#ffffff',
+        primaryBorderColor: '#38bdf8',
+        lineColor: '#94a3b8',
+        secondaryColor: '#0f766e',
+        tertiaryColor: '#1e293b'
+      }
+    });
+
+    function getSVGElement() {
+      const svg = document.querySelector('#diagram svg');
+      if (!svg) {
+        alert('Diagram sedang dimuat, silakan coba sesaat lagi.');
+        return null;
+      }
+      return svg;
+    }
+
+    function downloadSVG() {
+      const svg = getSVGElement();
+      if (!svg) return;
+      const serializer = new XMLSerializer();
+      let source = serializer.serializeToString(svg);
+      if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
+        source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+      }
+      const blob = new Blob([source], {type: "image/svg+xml;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "flowchart_wealth_aggregator.svg";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    function downloadPNG() {
+      const svg = getSVGElement();
+      if (!svg) return;
+      const serializer = new XMLSerializer();
+      const svgString = serializer.serializeToString(svg);
+      const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+      const URLObj = window.URL || window.webkitURL || window;
+      const blobURL = URLObj.createObjectURL(svgBlob);
+
+      const img = new Image();
+      img.onload = function () {
+        const scale = 2; // High-DPI scale for retina sharpness
+        const canvas = document.createElement('canvas');
+        canvas.width = (svg.clientWidth || 800) * scale;
+        canvas.height = (svg.clientHeight || 1000) * scale;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        const pngURL = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = pngURL;
+        link.download = 'flowchart_wealth_aggregator.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URLObj.revokeObjectURL(blobURL);
+      };
+      img.src = blobURL;
+    }
+  </script>
+</body>
+</html>
