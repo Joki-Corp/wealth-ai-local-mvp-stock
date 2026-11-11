@@ -44,11 +44,13 @@ stock-extractor-mvp/
 │   └── stage6_deduplicator.py  # Cross-image scroll overlap deduplication
 ├── main.py                     # CLI entrypoint & Rich table/summary renderer
 ├── requirements.txt            # Python dependencies
+├── ARCHITECTURE_FLOW.md        # Visual architecture flowcharts & concept guide for teams
 ├── PROJECT_CONTEXT.md          # Architectural guide & AI Agent specifications
 └── README.md                   # This user guide
 ```
 
-For complete technical specifications and future AI development guidelines, see [PROJECT_CONTEXT.md](file:///Users/bayualif/Documents/referensi/nativemacdev/stock-extractor-mvp/PROJECT_CONTEXT.md).
+- For complete visual diagrams and pipeline flowcharts, see [ARCHITECTURE_FLOW.md](file:///Users/bayualif/Documents/referensi/nativemacdev/stock-extractor-mvp/ARCHITECTURE_FLOW.md).
+- For AI development guidelines and domain context, see [PROJECT_CONTEXT.md](file:///Users/bayualif/Documents/referensi/nativemacdev/stock-extractor-mvp/PROJECT_CONTEXT.md).
 
 ---
 
