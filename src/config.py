@@ -6,6 +6,8 @@ ASSETS_DIR = BASE_DIR / "assets"
 PROCESSED_ASSETS_DIR = BASE_DIR / "processed_assets"
 OUTPUT_DIR = BASE_DIR / "output"
 OUTPUT_JSON_FILE = OUTPUT_DIR / "portfolio_result.json"
+OUTPUT_HOLDINGS_CSV = OUTPUT_DIR / "portfolio_holdings.csv"
+OUTPUT_SOURCES_CSV = OUTPUT_DIR / "asset_sources.csv"
 
 # Supported image file extensions
 SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".heic", ".webp"}

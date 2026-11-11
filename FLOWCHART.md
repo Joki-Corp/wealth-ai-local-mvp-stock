@@ -46,3 +46,4 @@ flowchart TD
    Sistem menggunakan persamaan aljabar finansial:
    $$\text{Nilai Pasar} = \text{Modal (Invested)} + \text{Keuntungan/Kerugian (PnL)}$$
    Sehingga meskipun screenshot tidak menampilkan jumlah Lot, total nilai kekayaan tetap dapat dihitung dengan presisi 100%.
+

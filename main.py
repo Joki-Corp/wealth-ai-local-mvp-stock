@@ -1,3 +1,4 @@
+import csv
 import datetime
 import sys
 import time
@@ -13,6 +14,8 @@ from src.config import (
     PROCESSED_ASSETS_DIR,
     OUTPUT_DIR,
     OUTPUT_JSON_FILE,
+    OUTPUT_HOLDINGS_CSV,
+    OUTPUT_SOURCES_CSV,
     OLLAMA_MODEL,
     SUPPORTED_EXTENSIONS,
 )
