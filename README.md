@@ -7,6 +7,7 @@ A fast, offline, and privacy-preserving Python CLI tool for macOS (Apple Silicon
 ## 🎯 Main Goal & Core Value
 
 The primary purpose of this tool is to provide:
+
 1. **Jumlah Total Kekayaan (Grand Total Net Worth):** Satu angka total nilai kekayaan bersih dari gabungan seluruh aset yang dimasukkan.
 2. **Daftar Rincian Sumber Aset (Source Breakdown):** Tabel transparan yang menunjukkan total kekayaan tersebut bersumber dari mana saja (misal: Ajaib Rp 61.205.600, Stockbit Rp 12.500.000).
 3. **Audit Transparan (Underlying Holdings):** Rincian kepemilikan saham di tiap akun untuk verifikasi matematis ($1\text{ Lot} = 100\text{ Lembar}$, Modal, Nilai Pasar, PnL).
@@ -57,12 +58,15 @@ stock-extractor-mvp/
 ## 🛠️ Prerequisites & Setup
 
 ### 1. Requirements
+
 - macOS (Apple Silicon M1/M2/M3/M4 recommended)
 - Python 3.10+
 - [Ollama](https://ollama.com/) installed
 
 ### 2. Install & Start Ollama
+
 Start Ollama and download the `qwen3.5:2b` model:
+
 ```bash
 # Start Ollama service (if not already running)
 ollama serve
@@ -72,6 +76,7 @@ ollama pull qwen3.5:2b
 ```
 
 ### 3. Create Python Virtual Environment
+
 ```bash
 # Create virtual environment
 python3 -m venv venv
@@ -88,16 +93,19 @@ pip install -r requirements.txt
 ## 🖥️ Usage
 
 1. Place your portfolio screenshots inside the `./assets` directory:
+
    ```bash
    cp ~/Downloads/my_portfolio*.png ./assets/
    ```
 
 2. Run the pipeline:
+
    ```bash
    python main.py
    ```
 
 3. View terminal logs, progress timers, and the final portfolio table:
+
    ```text
    [STEP 1/6] Gatekeeper & Image Prep .......................... DONE (0.042s)
       ├─ Loaded 2 files from /.../assets
@@ -119,9 +127,16 @@ pip install -r requirements.txt
 ## ⚙️ Configuration
 
 You can customize thresholds in [src/config.py](file:///Users/bayualif/Documents/referensi/nativemacdev/stock-extractor-mvp/src/config.py):
+
 - `PHASH_CUTOFF`: Hamming distance for perceptual duplicate detection (default: `2`).
 - `LONG_IMAGE_ASPECT_RATIO`: Ratio triggering vertical slice chunking (default: `3.0`).
 - `Y_TOLERANCE`: Normalized vertical tolerance for row grouping (default: `0.015`).
 - `OLLAMA_MODEL`: Target Ollama model (default: `"qwen3.5:2b"`).
 - `MATH_TOLERANCE_PCT` & `MATH_TOLERANCE_NOMINAL`: Margin for self-verification checks.
 
+//CARA
+
+- ollama serve
+  pindah terminal baru
+- venv/bin/activate
+- python main.py
